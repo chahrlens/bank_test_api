@@ -1,4 +1,5 @@
 const express = require("express");
+const authMiddleware = require("../middlewares/auth.middleware");
 
 const router = express.Router();
 const vehiclesRouter = require("./vehicles.router");
@@ -14,7 +15,7 @@ router.get("/health-check", (req, res) => {
   });
 });
 
-router.use("/catalogs", vehiclesRouter);
-router.use("/auth", authRouter);
+router.use("/catalogs", authMiddleware.verifyToken, vehiclesRouter);
+router.use("/auth", authMiddleware.verifyToken, authRouter);
 
 module.exports = router;
