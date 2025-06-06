@@ -1,8 +1,7 @@
-const sequelize = require("sequelize");
-
+const Sequelize = require("sequelize");
 module.exports = function (sequelize, DataTypes) {
   return sequelize.define(
-    "Users",
+    "TransmissionsTypes",
     {
       id: {
         type: DataTypes.INTEGER,
@@ -10,21 +9,20 @@ module.exports = function (sequelize, DataTypes) {
         primaryKey: true,
         autoIncrement: true,
       },
-      fullName: {
-        type: DataTypes.STRING(100),
+      name: {
+        type: DataTypes.STRING(60),
         allowNull: false,
       },
-
       created_at: {
         type: DataTypes.DATE,
         allowNull: false,
-        defaultValue: sequelize.Sequelize.literal("CURRENT_TIMESTAMP"),
+        defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
       },
       updated_at: {
         type: DataTypes.DATE,
         allowNull: true,
         defaultValue: null,
-        onUpdate: sequelize.Sequelize.literal("CURRENT_TIMESTAMP"),
+        onUpdate: Sequelize.literal("CURRENT_TIMESTAMP"),
       },
       status: {
         type: DataTypes.TINYINT(1),
@@ -33,7 +31,7 @@ module.exports = function (sequelize, DataTypes) {
       },
     },
     {
-      tableName: "users",
+      tableName: "TransmissionsTypes",
       timestamps: false,
       indexes: [
         {

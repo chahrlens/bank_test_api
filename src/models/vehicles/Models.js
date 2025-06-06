@@ -2,7 +2,7 @@ const sequelize = require("sequelize");
 
 module.exports = function (sequelize, DataTypes) {
   return sequelize.define(
-    "Users",
+    "Models",
     {
       id: {
         type: DataTypes.INTEGER,
@@ -10,11 +10,14 @@ module.exports = function (sequelize, DataTypes) {
         primaryKey: true,
         autoIncrement: true,
       },
-      fullName: {
-        type: DataTypes.STRING(100),
+      name: {
+        type: DataTypes.STRING(60),
         allowNull: false,
       },
-
+      line_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
       created_at: {
         type: DataTypes.DATE,
         allowNull: false,
@@ -33,7 +36,7 @@ module.exports = function (sequelize, DataTypes) {
       },
     },
     {
-      tableName: "users",
+      tableName: "Models",
       timestamps: false,
       indexes: [
         {
