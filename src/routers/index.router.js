@@ -14,7 +14,7 @@ router.get("/health-check", (req, res) => {
   });
 });
 
-router.use("/vehicles", vehiclesRouter);
+router.use("/catalogs", vehiclesRouter);
 router.use("/auth", authRouter);
 
 module.exports = router;

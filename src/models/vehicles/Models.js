@@ -17,6 +17,10 @@ module.exports = function (sequelize, DataTypes) {
       line_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        references: {
+          model: "CardLines",
+          key: "id",
+        },
       },
       created_at: {
         type: DataTypes.DATE,
@@ -44,6 +48,11 @@ module.exports = function (sequelize, DataTypes) {
           using: "BTREE",
           unique: true,
           fields: ["id"],
+        },
+        {
+          name: "line_id_index",
+          using: "BTREE",
+          fields: ["line_id"],
         },
       ],
     }
