@@ -1,7 +1,7 @@
 const Sequelize = require("sequelize");
 module.exports = function (sequelize, DataTypes) {
   return sequelize.define(
-    "TransmissionsTypes",
+    "FuelTypes",
     {
       id: {
         type: DataTypes.INTEGER,
@@ -31,7 +31,7 @@ module.exports = function (sequelize, DataTypes) {
       },
     },
     {
-      tableName: "TransmissionsTypes",
+      tableName: "FuelTypes",
       timestamps: false,
       indexes: [
         {

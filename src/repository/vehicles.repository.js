@@ -55,7 +55,7 @@ exports.disableBrand = async (id) => {
 };
 
 exports.getLines = async ({ status = 1, id, name, brandId }) => {
-  return await db.models.Lines.findAll({
+  return await db.models.CarLines.findAll({
     where: {
       status,
       ...(id ? { id } : {}),
@@ -72,15 +72,15 @@ exports.getLines = async ({ status = 1, id, name, brandId }) => {
 };
 
 exports.addLine = async ({ name, brandId }) => {
-  return await db.models.Lines.create({ name, brand_id: brandId });
+  return await db.models.CarLines.create({ name, brand_id: brandId });
 };
 
-exports.updateLine = async ({ id, name }) => {
-  return await db.models.Lines.update({ name }, { where: { status: 1, id } });
+exports.updateCarLine = async ({ id, name }) => {
+  return await db.models.CarLines.update({ name }, { where: { status: 1, id } });
 };
 
 exports.disableLine = async (id) => {
-  return await db.models.Lines.update(
+  return await db.models.CarLines.update(
     { status: 0 },
     { where: { status: 1, id } }
   );
@@ -207,7 +207,7 @@ exports.getVehicles = async ({
         },
         include: [
           {
-            model: db.models.Lines,
+            model: db.models.CarLines,
             as: "line",
             where: { status: 1, ...(brandId ? { brandId } : {}) },
             include: [
@@ -253,6 +253,7 @@ exports.addVehicle = async ({
     image_url: imageUrl,
   });
 };
+
 exports.updateVehicle = async ({
   id,
   plate,
