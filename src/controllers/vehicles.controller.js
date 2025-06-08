@@ -426,18 +426,17 @@ exports.getVehicles = async (req, res, next) => {
 exports.addVehicle = async (req, res, next) => {
   try {
     const {
-      modelId,
-      userId,
-      vim,
+      plate,
       color,
-      engineNumber,
-      mileage,
-      plateNumber,
-      fuelType,
       transmissionType,
+      fuelType,
+      modelId,
+      engineNumber,
+      vim,
+      mileage,
       registrationDate,
-      description,
       imageUrl,
+      description,
     } = req.body;
 
     if (
@@ -451,23 +450,22 @@ exports.addVehicle = async (req, res, next) => {
       return next(
         createError(
           400,
-          "Plate, color, transmission type, fuel type, and model ID are required"
+          "Color, transmission type, fuel type, and model ID are required"
         )
       );
     }
     const vehicle = await vehicleRepository.addVehicle({
-      modelId,
-      userId,
-      vim,
+      plate,
       color,
-      engineNumber,
-      mileage,
-      plateNumber,
-      fuelType,
       transmissionType,
+      fuelType,
+      modelId,
+      engineNumber,
+      vim,
+      mileage,
       registrationDate,
-      description,
       imageUrl,
+      description,
     });
     res.status(201).json(vehicle);
   } catch (error) {
@@ -478,12 +476,12 @@ exports.addVehicle = async (req, res, next) => {
 
 exports.updateVehicle = async (req, res, next) => {
   try {
-    const { id, plate, color, transmissionType, fuelType, modelId } = req.body;
-    if (!id || !plate || !color || !transmissionType || !fuelType || !modelId) {
+    const { id, plate, color, transmissionType, fuelType, modelId, engineNumber, vim, mileage, registrationDate, imageUrl, description } = req.body;
+    if (!id || !color || !transmissionType || !fuelType || !modelId) {
       return next(
         createError(
           400,
-          "ID, plate, color, transmission type, fuel type, and model ID are required"
+          "ID, color, transmission type, fuel type, and model ID are required"
         )
       );
     }
@@ -494,6 +492,12 @@ exports.updateVehicle = async (req, res, next) => {
       transmissionType,
       fuelType,
       modelId,
+      engineNumber,
+      vim,
+      mileage,
+      registrationDate,
+      imageUrl,
+      description,
     });
     if (vehicle[0] === 0) {
       return next(createError(404, "Vehicle not found or not updated"));

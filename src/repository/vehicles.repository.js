@@ -233,46 +233,66 @@ exports.getVehicles = async ({
 };
 
 exports.addVehicle = async ({
-  modelId,
   userId,
-  vim,
-  color,
-  engineNumber,
-  mileage,
-  plateNumber,
-  fuelType,
-  transmissionType,
-  registrationDate,
-  description,
-  imageUrl,
-}) => {
-  return await db.models.Vehicles.create({
-    model_id: modelId,
-    user_id: userId,
-    vim,
-    color,
-    engine_number: engineNumber,
-    mileage,
-    plate_number: plateNumber,
-    fuel_type: fuelType,
-    transmission_type: transmissionType,
-    registration_date: registrationDate,
-    description,
-    image_url: imageUrl,
-  });
-};
-
-exports.updateVehicle = async ({
-  id,
   plate,
   color,
   transmissionType,
   fuelType,
   modelId,
+  engineNumber,
+  vim,
+  mileage,
+  imageUrl,
+  registrationDate,
+  description,
+}) => {
+  return await db.models.Vehicles.create({
+    user_id: userId,
+    plate_number: plate,
+    color,
+    transmission_tye_id: transmissionType,
+    fuel_type_id: fuelType,
+    model_id: modelId,
+    engine_number: engineNumber,
+    vim,
+    mileage,
+    imageUrl,
+    registration_date: registrationDate,
+    description
+  });
+};
+
+exports.updateVehicle = async ({
+  id,
+  userId,
+  plate,
+  color,
+  transmissionType,
+  fuelType,
+  modelId,
+  engineNumber,
+  vim,
+  mileage,
+  imageUrl,
+  registrationDate,
+  description,
 }) => {
   return await db.models.Vehicles.update(
-    { plate, color, transmissionType, fuelType, modelId },
-    { where: { status: 1, id } }
+    {
+      user_id: userId,
+      plate_number: plate,
+      color,
+      transmission_tye_id: transmissionType,
+      fuel_type_id: fuelType,
+      model_id: modelId,
+      engine_number: engineNumber,
+      vim,
+      mileage,
+      imageUrl,
+      registration_date: registrationDate,
+      description
+    },
+    { where: { id } }
   );
 };
 
