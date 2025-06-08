@@ -24,10 +24,10 @@ function initModels(sequelize) {
   Brands.hasMany(CarLines, { as: "car_lines", foreignKey: "brand_id" });
   Models.belongsTo(CarLines, { as: "line", foreignKey: "line_id" });
   CarLines.hasMany(Models, { as: "models", foreignKey: "line_id" });
-  Vehicles.belongsTo(FuelTypes, { as: "fuel_type_fuel_type", foreignKey: "fuel_type" });
-  FuelTypes.hasMany(Vehicles, { as: "vehicles", foreignKey: "fuel_type" });
-  Vehicles.belongsTo(TransmissionsTypes, { as: "transmission_type_transmissions_type", foreignKey: "transmission_type" });
-  TransmissionsTypes.hasMany(Vehicles, { as: "vehicles", foreignKey: "transmission_type" });
+  Vehicles.belongsTo(FuelTypes, { as: "fuel_type", foreignKey: "fuel_type_id" });
+  FuelTypes.hasMany(Vehicles, { as: "vehicles", foreignKey: "fuel_type_id" });
+  Vehicles.belongsTo(TransmissionsTypes, { as: "transmission_type", foreignKey: "transmission_type_id" });
+  TransmissionsTypes.hasMany(Vehicles, { as: "vehicles", foreignKey: "transmission_type_id" });
 
   return {
     Users,

@@ -80,8 +80,8 @@ CREATE TABLE Vehicles (
     engine_number VARCHAR(30) NOT NULL,
     mileage INT NOT NULL DEFAULT 0,
     plate_number VARCHAR(15) DEFAULT NULL,
-    fuel_type VARCHAR(20) NOT NULL,
-    transmission_type VARCHAR(20) NOT NULL,
+    fuel_type_id INT NOT NULL,
+    transmission_type_id INT NOT NULL,
     registration_date DATE NOT NULL,
     image_url VARCHAR(255) DEFAULT NULL,
     description TEXT DEFAULT NULL,
@@ -90,8 +90,11 @@ CREATE TABLE Vehicles (
     status tinyint NOT NULL DEFAULT 1,
     UNIQUE (vim),
     UNIQUE (engine_number),
+    UNIQUE (plate_number),
     FOREIGN KEY (model_id) REFERENCES Models(id),
-    FOREIGN KEY (user_id) REFERENCES Users(id)
+    FOREIGN KEY (user_id) REFERENCES Users(id),
+    FOREIGN KEY (fuel_type_id) REFERENCES FuelTypes(id),
+    FOREIGN KEY (transmission_type_id) REFERENCES TransmissionsTypes(id)
 );
 
 INSERT INTO Users (fullName) VALUES ('John Doe');
@@ -118,7 +121,34 @@ INSERT INTO FuelTypes (name) VALUES ('Diesel');
 INSERT INTO FuelTypes (name) VALUES ('Electric');
 INSERT INTO FuelTypes (name) VALUES ('Gasoline');
 
-INSERT INTO Vehicles (model_id, user_id, vim, color, engine_number, mileage, fuel_type, transmission_type, registration_date)
-VALUES ((SELECT id FROM Models WHERE name = 'Corolla LE'), (SELECT id FROM Users WHERE fullName = 'John Doe'), '12345ABCDEFG', 'Red', 'ENG123', 1000, 'Gasoline', 'Automatic', '2024-01-01'),
-((SELECT id FROM Models WHERE name = 'Civic LX'), (SELECT id FROM Users WHERE fullName = 'John Doe'), '67890HIJKLMN', 'Blue', 'ENG456', 5000, 'Diesel', 'Manual', '2024-02-01'),
-((SELECT id FROM Models WHERE name = 'Focus SE'), (SELECT id FROM Users WHERE fullName = 'John Doe'), '11223OPQRSTU', 'Black', 'ENG789', 2000, 'Electric', 'CVT', '2024-03-01');
+INSERT INTO Vehicles (model_id, user_id, vim, color, engine_number, mileage, fuel_type_id, transmission_type_id, registration_date)
+VALUES 
+    ((SELECT id FROM Models WHERE name = 'Corolla LE'), 
+     (SELECT id FROM Users WHERE fullName = 'John Doe'), 
+     '12345ABCDEFG', 
+     'Red', 
+     'ENG123', 
+     1000, 
+     3,
+     1,
+     '2024-01-01'),
+
+    ((SELECT id FROM Models WHERE name = 'Civic LX'), 
+     (SELECT id FROM Users WHERE fullName = 'John Doe'), 
+     '67890HIJKLMN', 
+     'Blue', 
+     'ENG456', 
+     5000, 
+     1,
+     2,
+     '2024-02-01'),
+
+    ((SELECT id FROM Models WHERE name = 'Focus SE'), 
+     (SELECT id FROM Users WHERE fullName = 'John Doe'), 
+     '11223OPQRSTU', 
+     'Black', 
+     'ENG789', 
+     2000, 
+     1,
+     2, 
+     '2024-03-01');

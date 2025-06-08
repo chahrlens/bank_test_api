@@ -193,8 +193,6 @@ exports.getVehicles = async ({
       ...(id ? { id } : {}),
       ...(plate ? { plate: { [Op.like]: `%${plate}%` } } : {}),
       ...(color ? { color: { [Op.like]: `%${color}%` } } : {}),
-      ...(transmissionType ? { transmissionType } : {}),
-      ...(fuelType ? { fuelType } : {}),
       ...(modelId ? { modelId } : {}),
     },
     include: [
@@ -219,6 +217,16 @@ exports.getVehicles = async ({
             ],
           },
         ],
+      },
+      {
+        model: db.models.TransmissionsTypes,
+        as: "transmission_type",
+        where: { ...(transmissionType ? { id: transmissionType, status: 1 } : {}) },
+      },
+      {
+        model: db.models.FuelTypes,
+        as: "fuel_type",
+        where: { ...(fuelType ? { id: fuelType, status: 1 } : {}) },
       },
     ],
   });

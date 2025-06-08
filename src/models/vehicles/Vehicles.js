@@ -1,5 +1,5 @@
 const Sequelize = require("sequelize");
-module.exports = function (sequelize, DataTypes) {
+module.exports = function(sequelize, DataTypes) {
   return sequelize.define(
     "Vehicles",
     {
@@ -53,7 +53,7 @@ module.exports = function (sequelize, DataTypes) {
         allowNull: true,
         unique: true,
       },
-      fuel_type: {
+      fuel_type_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
@@ -61,7 +61,7 @@ module.exports = function (sequelize, DataTypes) {
           key: "id",
         },
       },
-      transmission_type: {
+      transmission_type_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {

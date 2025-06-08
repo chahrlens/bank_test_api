@@ -32,7 +32,7 @@ router.get("/fuel-types", vehicleController.getFuelTypes);
 router.post("/fuel-types", vehicleController.addFuelType);
 router.put("/fuel-types", vehicleController.updateFuelType);
 router.delete("/fuel-types/:id", vehicleController.disableFuelType);
-1
+
 router.get("/vehicles", vehicleController.getVehicles);
 router.post("/vehicles", vehicleController.addVehicle);
 router.put("/vehicles", vehicleController.updateVehicle);
