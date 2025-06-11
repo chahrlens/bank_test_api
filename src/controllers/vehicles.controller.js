@@ -437,6 +437,7 @@ exports.addVehicle = async (req, res, next) => {
       registrationDate,
       imageUrl,
       description,
+      userId,
     } = req.body;
 
     if (
@@ -466,6 +467,7 @@ exports.addVehicle = async (req, res, next) => {
       registrationDate,
       imageUrl,
       description,
+      userId,
     });
     res.status(201).json(vehicle);
   } catch (error) {
