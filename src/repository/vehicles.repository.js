@@ -276,6 +276,7 @@ exports.updateVehicle = async ({
   imageUrl,
   registrationDate,
   description,
+  statusId,
 }) => {
   return await db.models.Vehicles.update(
     {
@@ -290,7 +291,8 @@ exports.updateVehicle = async ({
       mileage,
       imageUrl,
       registration_date: registrationDate,
-      description
+      description,
+      status: statusId,
     },
     { where: { id } }
   );

@@ -478,7 +478,7 @@ exports.addVehicle = async (req, res, next) => {
 
 exports.updateVehicle = async (req, res, next) => {
   try {
-    const { id, plate, color, transmissionType, fuelType, modelId, engineNumber, vim, mileage, registrationDate, imageUrl, description } = req.body;
+    const { id, plate, color, transmissionType, fuelType, modelId, engineNumber, vim, mileage, registrationDate, imageUrl, description, statusId } = req.body;
     if (!id || !color || !transmissionType || !fuelType || !modelId) {
       return next(
         createError(
@@ -500,6 +500,7 @@ exports.updateVehicle = async (req, res, next) => {
       registrationDate,
       imageUrl,
       description,
+      statusId,
     });
     if (vehicle[0] === 0) {
       return next(createError(404, "Vehicle not found or not updated"));
